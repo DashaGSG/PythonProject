@@ -77,6 +77,19 @@ def load_data(city, month, day):
 
     return df
 
+def display(df):
+    userInput = input('\nDo you want to see first 5 rows?: y/n\n')
+    rows = 0
+    pd.set_option('display.max_columns',200)
+        
+    while True:
+        if userInput == 'n':
+            break
+        else:
+            print(df.iloc[rows: rows + 5])
+            rows += 5      
+            userInput = input('\ndo you want to see another 5 rows?: y/n\n"n"to continue with the statistics\n')  
+  
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
@@ -184,6 +197,7 @@ def main():
         city, month, day = get_filters()
         df = load_data(city, month, day)
 
+        display(df)
         time_stats(df)
         station_stats(df)
         trip_duration_stats(df)
